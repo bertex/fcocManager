@@ -1,11 +1,10 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Maps = sequelize.define('Maps', {
+  let Maps = sequelize.define('Maps', {
     name: DataTypes.STRING,
     club: DataTypes.STRING,
-    chartographer: DataTypes.STRING,
+    cartographer: DataTypes.STRING,
     year: DataTypes.INTEGER,
-    chartography: DataTypes.STRING,
+    cartography: DataTypes.STRING,
     geom: DataTypes.GEOMETRY
   }, {});
   Maps.associate = function(models) {
