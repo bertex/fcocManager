@@ -14,13 +14,13 @@ module.exports = {
       club: {
         type: Sequelize.STRING
       },
-      chartographer: {
+      cartographer: {
         type: Sequelize.STRING
       },
       year: {
         type: Sequelize.INTEGER
       },
-      chartography: {
+      cartography: {
         type: Sequelize.STRING
       },
       geom: {

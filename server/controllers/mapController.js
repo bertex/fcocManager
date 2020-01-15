@@ -3,21 +3,15 @@
 const Maps = require('../models').Maps;
 
 module.exports = {
-  async getAllMaps(req,res) {
-
+  async getMaps(req,res) {
     try {
-
-      const mapsCollection = await Maps.find({});
-
+      const mapsCollection = await Maps.findAll();
       res.status(201).send(mapsCollection);
-
     }
     catch(e){
       console.log(e);
-
       res.status(500).send(e);
     }
-
   },
 
   async create(req, res) {
@@ -25,39 +19,31 @@ module.exports = {
       const mapCollection = await Maps.create({
         name: req.body.name,
         club: req.body.club,
-        cartographer: req.body.chartographer,
+        cartographer: req.body.cartographer,
+        cartography: req.body.cartography,
         year: req.body.year,
         geom: req.body.geom,
       });
-
       res.status(201).send(mapCollection);
     } catch (e) {
       console.log(e);
       res.status(400).send(e);
     }
-
   },
 
   async update(req, res) {
-
     try {
       const mapCollection = await Maps.find({
         id: req.params.mapId
       });
-
       if (mapCollection) {
-
         const updatedMap = await Maps.update({
           id: req.body.mapId,
         });
-
         res.status(201).send(updatedMap)
-
       } else {
-
         res.status(404).send("Map Not Found");
       }
-
     } catch (e) {
       console.log(e);
 

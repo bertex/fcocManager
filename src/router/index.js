@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Auth from '@okta/okta-vue'
 import FormComponent from "../components/FormComponent";
+import ShowMap from "../components/ShowMap";
 
 Vue.use(Auth, {
   issuer: 'https://dev-997079.okta.com/oauth2/default',
@@ -17,6 +18,11 @@ let router = new Router({
   routes: [
     {
       path: '/',
+      name: 'ShowMap',
+      component: ShowMap,
+    },
+    {
+      path: '/form',
       name: 'FromComponent',
       component: FormComponent,
       meta: {
