@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     cartographer: DataTypes.STRING,
     year: DataTypes.INTEGER,
     cartography: DataTypes.STRING,
-    geom: DataTypes.GEOMETRY
+    geometry: DataTypes.GEOMETRY
   }, {});
   Maps.associate = function(models) {
     // associations can be defined here

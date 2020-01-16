@@ -23,7 +23,7 @@ module.exports = {
       cartography: {
         type: Sequelize.STRING
       },
-      geom: {
+      geometry: {
         type: Sequelize.GEOMETRY
       },
       createdAt: {

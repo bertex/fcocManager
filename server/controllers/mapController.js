@@ -2,10 +2,16 @@
 
 const Maps = require('../models').Maps;
 
+
 module.exports = {
   async getMaps(req,res) {
     try {
-      const mapsCollection = await Maps.findAll();
+      const mapsCollection = await Maps.findAll({
+        attributes: ['id', 'name','club','cartographer',
+          'cartography','year','geometry'
+
+        ]
+      });
       res.status(201).send(mapsCollection);
     }
     catch(e){
@@ -22,7 +28,7 @@ module.exports = {
         cartographer: req.body.cartographer,
         cartography: req.body.cartography,
         year: req.body.year,
-        geom: req.body.geom,
+        geometry: req.body.geom,
       });
       res.status(201).send(mapCollection);
     } catch (e) {

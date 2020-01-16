@@ -16,6 +16,7 @@
     "bootstrap": "^4.1.0",
     "bootstrap-vue": "^2.0.0-rc.7",
     "express": "^4.17.1",
+    "geojson": "^0.5.0",
     "leaflet": "^1.6.0",
     "node-sass": "^4.13.0",
     "pg": "^7.17.1",
