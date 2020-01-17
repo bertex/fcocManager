@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="fconmaps">
     <b-navbar toggleable="md" type="dark" variant="dark">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
       <b-navbar-brand to="/">My Vue App</b-navbar-brand>
@@ -8,6 +8,7 @@
           <b-nav-item to="/">Home</b-nav-item>
           <b-nav-item href="#" @click.prevent="login" v-if="!activeUser">Login</b-nav-item>
           <b-nav-item href="#" @click.prevent="logout" v-else>Logout</b-nav-item>
+          <b-nav-item to="/form">Mag regiter</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -18,8 +19,8 @@
 
 <script>
 
-  export default {
-    name: 'app',
+  module.exports = {
+    name: 'fcocmaps',
     data () {
       return {
         activeUser: null
@@ -47,3 +48,7 @@
     }
   }
 </script>
+<style>
+  @import 'node_modules/bootstrap/dist/css/bootstrap.css';
+  @import 'node_modules/bootstrap-vue/dist/bootstrap-vue.css';
+</style>

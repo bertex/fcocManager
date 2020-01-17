@@ -1,13 +1,11 @@
 <template>
-  <div id="mapContainer"></div>
+  <div id="LeafletMap"></div>
 </template>
 
 <script>
-  import "leaflet/dist/leaflet.css";
-  import L from "leaflet";
   import axios from "axios";
 
-  export default {
+  module.exports= {
     name: "LeafletMap",
     data() {
       return {
@@ -20,7 +18,6 @@
         .then(response => {
           const GeoJson = require ("geojson");
           this.geojson = response.data;
-          console.log(this.geojson);
           let showGeoJson =GeoJson.parse (this.geojson, {GeoJSON:'geometry'});
           let myLayer = L.geoJSON(showGeoJson ).addTo(this.map);
         })
@@ -43,6 +40,7 @@
 </script>
 
 <style scoped>
+  @import 'node_modules/leaflet/dist/leaflet.css';
   #mapContainer {
     width: 100vw;
     height: 100vh;

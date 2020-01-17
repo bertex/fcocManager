@@ -28,3 +28,9 @@ npm i sequelize-cli -g
 sequelize db:migrate
 sequelize db:sedd: all
 ```
+
+Start API
+ ```
+cd server
+node server.js
+```
