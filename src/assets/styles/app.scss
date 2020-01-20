@@ -1,4 +1,7 @@
-#app {
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
+#fcocMaps {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -36,3 +39,4 @@
     border-bottom: 2px solid #226906;
   }
 }
+

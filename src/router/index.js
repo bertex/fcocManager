@@ -1,19 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Auth from '@okta/okta-vue'
-import FormComponent from "@/components/FormComponent";
-import ShowMap from "@/components/ShowMap";
-
-Vue.use(Auth, {
-  issuer: 'https://dev-997079.okta.com/oauth2/default',
-  client_id: '0oaumjhpfM9mJYWOc4x5',
-  redirect_uri: 'http://localhost:8080/implicit/callback',
-  scope: 'openid profile form'
-});
+import FormComponent from "../components/FormComponent.vue";
+import ShowMap from "../components/ShowMap.vue";
 
 Vue.use(Router);
 
-let router = new Router({
+export  default new Router({
   mode: 'history',
   routes: [
     {
@@ -23,18 +15,17 @@ let router = new Router({
     },
     {
       path: '/form',
-      name: 'FromComponent',
+      name: 'FormComponent',
       component: FormComponent,
       meta: {
         requiresAuth: true
       }
     },
     {
-      path: '/implicit/callback',
-      component: Auth.handleCallback()
-    },
+      path: '*',
+      component: ShowMap,
+    }
   ]
 });
-router.beforeEach(Vue.prototype.$auth.authRedirectGuard());
 
-export default router
+

@@ -1,11 +1,11 @@
 <template>
-  <div id="LeafletMap"></div>
+  <div id="myMapId" ref="LeafletMap"></div>
 </template>
 
 <script>
   import axios from "axios";
 
-  module.exports= {
+  export default {
     name: "LeafletMap",
     data() {
       return {
@@ -25,7 +25,7 @@
           console.log(error)
           this.errored = true
         });
-      this.map = L.map("mapContainer").setView([41.50, 1.523], 8);
+      this.map =L.map(this.$refs['LeafletMap']).setView([41.50, 1.523], 8);
       L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
         attribution:
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -39,10 +39,10 @@
   };
 </script>
 
-<style scoped>
-  @import 'node_modules/leaflet/dist/leaflet.css';
-  #mapContainer {
-    width: 100vw;
-    height: 100vh;
+<style >
+  #myMapId {
+    width: 100%;
+    height: 600px;
   }
+
 </style>
