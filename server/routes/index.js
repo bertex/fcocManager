@@ -1,5 +1,6 @@
 // index.js
 const mapsController = require('../controllers/mapController');
+const fileController = require('../controllers/filesController')
 module.exports = (app) => {
 
   app.get('/api',(req,res) => {
@@ -13,5 +14,9 @@ module.exports = (app) => {
   app.post('/api/map/create',mapsController.create);
 
   app.put('/api/map/:mapId',mapsController.update);
+
+  app.post('api/uploadfile/fileId', fileController.uploadFile);
+
+  //app.get('api/getFile/:fileId', fileController.getfile);
 
 };

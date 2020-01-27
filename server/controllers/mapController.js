@@ -20,7 +20,8 @@ module.exports = {
     }
   },
 
-  async create(req, res) {
+  async create(req,res) {
+    console.log(req.body);
     try {
       const mapCollection = await Maps.create({
         name: req.body.name,

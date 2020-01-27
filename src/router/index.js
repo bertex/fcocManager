@@ -17,9 +17,6 @@ export  default new Router({
       path: '/form',
       name: 'FormComponent',
       component: FormComponent,
-      meta: {
-        requiresAuth: true
-      }
     },
     {
       path: '*',

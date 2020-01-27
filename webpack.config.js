@@ -69,6 +69,9 @@ module.exports = {
       }
     ]
   },
+  node: {
+    fs: "empty"
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
