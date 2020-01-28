@@ -61,8 +61,8 @@
 <script>
 
   import {required, email, minLength} from "vuelidate/lib/validators";
-  import shp from "shpjs";
-  //import shapefile from "shapefile";
+  //import shp from "shpjs";
+  const shapefile = require('shapefile');
   import axios from "axios";
   //import  shapefile2geojson from 'shapefile2geojson';
   export default {
@@ -98,8 +98,8 @@
         this.$v.form.$touch();
         if (this.$v.form.$error) return;
         console.log(this.data.ziped);
-        this.form.file = shp(this.data.file)
-          .then(function(a){return a.features});
+        //this.form.file = shp(this.data.file)
+        //  .then(function(a){return a.features});
         console.log(this.form.file);
         /*axios
           .post( 'http://localhost:3000/api/map/create',
@@ -123,7 +123,7 @@
       },
       handleFileUpload(){
         this.data.file = this.$refs.file.files[0];
-        let reader  = new FileReader();
+        /*let reader  = new FileReader();
         reader.addEventListener("load", function () {
           this.data.ziped = reader.result;
         }.bind(this), false);
@@ -131,7 +131,19 @@
           if ( /\.(shp)$/i.test( this.data.file.name ) ) {
             reader.readAsDataURL( this.data.file );
           }
-        }
+        }*/
+        let shpPath = '/src/data/';
+        /*shapefile.read(shpPath + 'POLYGON.shp', shpPath + 'POLYGON.dbf',function(err,json) {
+          console.log(json)
+        })*/
+        this.form.file=shapefile.open(shpPath + 'POLYGON.shp')
+          .then(source => source.read()
+            .then(function log(result) {
+              if (result.done) return;
+              console.log(result.value);
+              return source.read().then(log);
+            }))
+          .catch(error => console.error(error.stack));
       },
     },
     mounted() {
