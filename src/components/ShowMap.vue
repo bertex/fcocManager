@@ -22,7 +22,7 @@
           let myLayer = L.geoJSON(showGeoJson ).addTo(this.map);
         })
         .catch(error => {
-          console.log(error)
+          console.log(error);
           this.errored = true
         });
       this.map =L.map(this.$refs['LeafletMap']).setView([41.50, 1.523], 8);

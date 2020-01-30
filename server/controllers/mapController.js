@@ -23,13 +23,14 @@ module.exports = {
   async create(req,res) {
     console.log(req.body);
     try {
+      const polygon = req.body.file;
       const mapCollection = await Maps.create({
         name: req.body.name,
         club: req.body.club,
         cartographer: req.body.cartographer,
         cartography: req.body.cartography,
-        year: req.body.year,
-        geometry: req.body.file,
+        geometry: polygon,
+        year: req.body.year
       });
       res.status(201).send(mapCollection);
     } catch (e) {

@@ -92,7 +92,7 @@
         this.$v.form.$touch();
         if (this.$v.form.$error) return;
         this.form.file = await this.shpToGeoJson();
-
+        console.log (this.form.file.geometry);
         axios
           .post( 'http://localhost:3000/api/map/create',
           {
@@ -101,7 +101,7 @@
             year: this.form.year,
             cartographer: this.form.cartographer,
             cartography: this.form.cartography,
-            file: this.form.file,
+            file: this.form.file.geometry,
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
             },
@@ -124,7 +124,6 @@
             reader.readAsArrayBuffer(this.data.file );
           }
         }
-        //let shpPath = '../data/';
       },
       async shpToGeoJson() {
         let dummy;
