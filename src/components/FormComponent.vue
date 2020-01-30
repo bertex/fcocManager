@@ -44,16 +44,12 @@
           </label>
         </div>
         <div >
-          <input type="file" id="file" ref="file" accept=".shp" v-on:change="handleFileUpload()"/>
+          <input type="file" id="file" ref="file" accept=".shp" @change="handleFileUpload($event)"/>
         </div>
       </div>
       <div class="text-center">
         <button >Submit</button>
       </div>
-    </form>
-    <form action="http://localhost:3000/api/uploadfile" enctype="multipart/form-data" method="POST">
-      <input type="file" name="myFile" />
-      <input type="submit" value="Upload a file"/>
     </form>
   </div>
 </template>
@@ -61,10 +57,8 @@
 <script>
 
   import {required, email, minLength} from "vuelidate/lib/validators";
-  //import shp from "shpjs";
   const shapefile = require('shapefile');
   import axios from "axios";
-  //import  shapefile2geojson from 'shapefile2geojson';
   export default {
     name: "FormComponent",
 
@@ -94,14 +88,12 @@
     }
   },
     methods: {
-      submit(){
+      async submit(){
         this.$v.form.$touch();
         if (this.$v.form.$error) return;
-        console.log(this.data.ziped);
-        //this.form.file = shp(this.data.file)
-        //  .then(function(a){return a.features});
-        console.log(this.form.file);
-        /*axios
+        this.form.file = await this.shpToGeoJson();
+
+        axios
           .post( 'http://localhost:3000/api/map/create',
           {
             name: this.form.name,
@@ -119,32 +111,33 @@
         })
           .catch(function(){
             console.log('FAILURE!!');
-          });*/
+          });
       },
-      handleFileUpload(){
-        this.data.file = this.$refs.file.files[0];
-        /*let reader  = new FileReader();
+      handleFileUpload(event){
+        this.data.file =event.target.files[0];
+        let reader  = new FileReader();
         reader.addEventListener("load", function () {
           this.data.ziped = reader.result;
         }.bind(this), false);
         if( this.data.file ){
           if ( /\.(shp)$/i.test( this.data.file.name ) ) {
-            reader.readAsDataURL( this.data.file );
+            reader.readAsArrayBuffer(this.data.file );
           }
-        }*/
-        let shpPath = '/src/data/';
-        /*shapefile.read(shpPath + 'POLYGON.shp', shpPath + 'POLYGON.dbf',function(err,json) {
-          console.log(json)
-        })*/
-        this.form.file=shapefile.open(shpPath + 'POLYGON.shp')
+        }
+        //let shpPath = '../data/';
+      },
+      async shpToGeoJson() {
+        let dummy;
+        await shapefile.open( this.data.ziped)
           .then(source => source.read()
             .then(function log(result) {
               if (result.done) return;
-              console.log(result.value);
+              dummy = result.value;
               return source.read().then(log);
             }))
           .catch(error => console.error(error.stack));
-      },
+        return dummy;
+      }
     },
     mounted() {
     },

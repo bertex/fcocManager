@@ -29,7 +29,7 @@ module.exports = {
         cartographer: req.body.cartographer,
         cartography: req.body.cartography,
         year: req.body.year,
-        geometry: req.body.geom,
+        geometry: req.body.file,
       });
       res.status(201).send(mapCollection);
     } catch (e) {
