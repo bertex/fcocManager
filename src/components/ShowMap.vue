@@ -18,13 +18,21 @@
         .then(response => {
           const GeoJson = require ("geojson");
           this.geojson = response.data;
+          console.log(this.geojson);
           let showGeoJson =GeoJson.parse (this.geojson, {GeoJSON:'geometry'});
-          let myLayer = L.geoJSON(showGeoJson ).addTo(this.map);
+          let myLayer = L.geoJSON(showGeoJson,{
+            onEachFeature: function (feature, layer) {
+            layer.bindPopup(feature.properties.name + '</br>' + feature.properties.club
+              + '</br>' +feature.properties.cartographer + '</br>' + feature.properties.cartography
+              + '</br>' + feature.properties.year);
+            }})
+            .addTo(this.map);
         })
         .catch(error => {
           console.log(error);
           this.errored = true
         });
+
       this.map =L.map(this.$refs['LeafletMap']).setView([41.50, 1.523], 8);
       L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
         attribution:
@@ -41,7 +49,7 @@
 
 <style >
   #myMapId {
-    width: 100%;
+    width: 800px;
     height: 600px;
   }
 
