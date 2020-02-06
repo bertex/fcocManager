@@ -2,28 +2,28 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from "vue"
 import App from './App.vue'
-import Vuelidate from "vuelidate"
 import router from './router'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import BootstrapVue from 'bootstrap-vue'
 import L from 'leaflet'
 import './assets/styles/app.scss'
 import '../node_modules/leaflet/dist/leaflet.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.css'
+import '../node_modules/bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false;
 
 Vue.use(L);
-Vue.use(Vuelidate);
 Vue.use(BootstrapVue);
-Vue.use(IconsPlugin)
 
 /* eslint-disable no-new */
-const root =new Vue({
-  router: router,
-  L,
-  components: { App },
-  template: "<App/>",
-  render: h => h(App)
-}).$mount('fcocMaps');
+  const root =new Vue({
+    router: router,
+    L,
+    el: 'fcocMaps',
+    components: { App },
+    template: "<App/>",
+    render: h => h(App)
+  });
 document.body.appendChild(root.$el);
 
 
