@@ -30,10 +30,9 @@
         })
         .catch(error => {
           console.log(error);
-          this.errored = true
         });
 
-      this.map =L.map(this.$refs['LeafletMap']).setView([41.50, 1.523], 8);
+      this.map =L.map(this.$refs['LeafletMap']).setView([41.50, 1.523], 8,);
       L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
         attribution:
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

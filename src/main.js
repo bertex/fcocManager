@@ -24,6 +24,5 @@ Vue.use(BootstrapVue);
     template: "<App/>",
     render: h => h(App)
   }).$mount('#fcocMaps');
-//document.body.appendChild(root.$el);
 
 
