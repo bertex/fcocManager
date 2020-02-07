@@ -6,34 +6,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BabelPolfill= require("babel-polyfill");
 
 module.exports = {
-  mode: 'development',
   entry: ['babel-polyfill', './src/main.js'],
-  devtool: 'inline-source-map',
-  devServer: {
-    contentBase: './dist',
-  },
   resolve: {
     alias: {
-      "./images/layers.png$": path.resolve(
-        __dirname,
-        "./node_modules/leaflet/dist/images/layers.png"
-      ),
-      "./images/layers-2x.png$": path.resolve(
-        __dirname,
-        "./node_modules/leaflet/dist/images/layers-2x.png"
-      ),
-      "./images/marker-icon.png$": path.resolve(
-        __dirname,
-        "./node_modules/leaflet/dist/images/marker-icon.png"
-      ),
-      "./images/marker-icon-2x.png$": path.resolve(
-        __dirname,
-        "./node_modules/leaflet/dist/images/marker-icon-2x.png"
-      ),
-      "./images/marker-shadow.png$": path.resolve(
-        __dirname,
-        "./node_modules/leaflet/dist/images/marker-shadow.png"
-      )}
+      'vue$': 'vue/dist/vue.esm.js'
+    },
+    extensions: ['*', '.js', '.vue', '.json']
     },
   module: {
     rules: [
@@ -68,21 +46,6 @@ module.exports = {
 
       }
     ]
-  },
-  node: {
-    fs: "empty"
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      title: 'FCOC Gestor de Mapes',
-      showErrors: true
-    })
-  ],
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
   },
 };
 

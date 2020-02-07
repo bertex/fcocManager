@@ -9,6 +9,7 @@ import './assets/styles/app.scss'
 import '../node_modules/leaflet/dist/leaflet.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../node_modules/bootstrap-vue/dist/bootstrap-vue.css'
+import 'babel-polyfill'
 
 Vue.config.productionTip = false;
 
@@ -19,11 +20,10 @@ Vue.use(BootstrapVue);
   const root =new Vue({
     router: router,
     L,
-    el: 'fcocMaps',
     components: { App },
     template: "<App/>",
     render: h => h(App)
-  });
-document.body.appendChild(root.$el);
+  }).$mount('#fcocMaps');
+//document.body.appendChild(root.$el);
 
 
