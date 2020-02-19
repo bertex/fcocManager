@@ -23,6 +23,8 @@ module.exports = {
   async create(req,res) {
     console.log(req.body);
     try {
+      let token = getToken(req.headers);
+      if (token) {
       const polygon = req.body.file;
       const mapCollection = await Maps.create({
         name: req.body.name,
@@ -33,6 +35,9 @@ module.exports = {
         year: req.body.year
       });
       res.status(201).send(mapCollection);
+      } else {
+        return res.status(403).send({success: false, msg: 'Unauthorized.'});
+      }
     } catch (e) {
       console.log(e);
       res.status(400).send(e);
@@ -58,36 +63,18 @@ module.exports = {
       res.status(500).send(e);
 
     }
-  }
-}
-
-
-/*const Pool = require('pg').Pool;
-const GeoJSON = require('geojson');
-const config = require('../config');
-const { db: { user, host, database, password, port } } = config;
-const pool = new Pool({
-  user: user,
-  host: host,
-  database: database,
-  password: password,
-  port: port,
-});
-
-const getGeojson = (request, response, next) => {
-  let queryLayer = 'SELECT  st_asGeoJson(geom) as geometry FROM test;';
-  pool.query(queryLayer, (err, res) => {
-    if (err) {
-      return console.error('Error Intern ', err.stack);
+  },
+  let: getToken = function (headers) {
+    if (headers && headers.authorization) {
+      let parted = headers.authorization.split(' ');
+      if (parted.length === 2) {
+        return parted[1];
+      } else {
+        return null;
+      }
+    } else {
+      return null;
     }
-    let data = res.rows;
-    let geo;
-    data.forEach( function (item, index, array){
-      geo  = JSON.parse (array[index].geometry);
-      array[index].geometry = geo;
-    });
-    let geojson = GeoJSON.parse(data, {GeoJSON : 'geometry' });
-    response.json(geojson);
-  });
+  }
 };
-module.exports = { getGeojson };*/
+
