@@ -10,15 +10,24 @@ import '../node_modules/leaflet/dist/leaflet.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../node_modules/bootstrap-vue/dist/bootstrap-vue.css'
 import 'babel-polyfill'
+import store from './store/store.js'
+import Axios from 'axios'
 
 Vue.config.productionTip = false;
+Vue.prototype.$http = Axios;
 
 Vue.use(L);
 Vue.use(BootstrapVue);
 
+const token = localStorage.getItem('user-token')
+if (token) {
+  Vue.prototype.$http.defaults.headers.common['Authorization'] = token
+}
+
 /* eslint-disable no-new */
   const root =new Vue({
-    router: router,
+    router,
+    store,
     L,
     components: { App },
     template: "<App/>",
