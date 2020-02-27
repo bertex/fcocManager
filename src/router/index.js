@@ -4,6 +4,7 @@ import FormComponent from "../components/FormComponent.vue";
 import ShowMap from "../components/ShowMap.vue";
 import Login from "../components/Login.vue";
 import Register from "../components/register.vue";
+import ListMaps from "../components/ListMaps";
 import store from "../store/store.js";
 
 Vue.use(Router);
@@ -20,6 +21,14 @@ let router = new Router({
       path: '/form',
       name: 'FormComponent',
       component: FormComponent,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/account',
+      name: 'ListMaps',
+      component: ListMaps,
       meta: {
         requiresAuth: true
       }

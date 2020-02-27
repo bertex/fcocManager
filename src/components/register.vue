@@ -56,6 +56,12 @@
       </b-form-group>
       <b-button type="submit" variant="primary">Register</b-button>
     </b-form>
+    <div class="success" v-if="savingSuccessful">
+      {{ this.text }}
+    </div>
+    <div class="success" v-if="apiError">
+      {{ this.textError }}
+    </div>
   </div>
 </template>
 <script>
@@ -65,9 +71,14 @@
         name: "",
         email: "",
         password: "",
-        password_confirmation: ""
+        password_confirmation: "",
+        text: " Usuari inserit de forma correcte",
+        textError: "no s'ha pogut insertar l'usuari.",
+        savingSuccessful: false,
+        apiError: false,
       }
     },
+
     methods: {
       register: function () {
         let data = {
@@ -77,7 +88,8 @@
         };
         this.$store.dispatch('register', data)
           .then(() => this.$router.push('/'))
-          .catch(err => console.log(err))
+          .catch(err => {console.log(err);this.apiError = true})
+          .finally(() => this.savingSuccessful = true);
       }
     }
   }

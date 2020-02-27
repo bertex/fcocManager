@@ -3,7 +3,7 @@
 import Vue from "vue"
 import App from './App.vue'
 import router from './router'
-import BootstrapVue from 'bootstrap-vue'
+import {BootstrapVue,IconsPlugin } from 'bootstrap-vue'
 import L from 'leaflet'
 import './assets/styles/app.scss'
 import '../node_modules/leaflet/dist/leaflet.css'
@@ -18,6 +18,7 @@ Vue.prototype.$http = Axios;
 
 Vue.use(L);
 Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
 
 const token = localStorage.getItem('user-token')
 if (token) {

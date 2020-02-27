@@ -158,10 +158,9 @@
             }
           ).then(function () {
           console.log('SUCCESS!!');
-
         })
           .catch(error => {
-            console.log(error)
+            console.log(error);
             this.apiError = true
           })
           .finally(() => this.savingSuccessful = true);
@@ -173,18 +172,18 @@
       onReset(evt) {
         evt.preventDefault();
         // Reset our form values
-        this.form.name = null,
-          this.form.club = null,
-          this.form.cartography = null,
-          this.form.cartographer = null,
-          this.form.year = null,
-          this.form.file = null,
-          // Trick to reset/clear native browser form validation state
-          this.savingSuccessful = true,
-          this.$nextTick(() => {
-            this.savingSuccessful = false
-            this.$v.$reset();
-          })
+        this.form.name = null;
+        this.form.club = null;
+        this.form.cartography = null;
+        this.form.cartographer = null;
+        this.form.year = null;
+        this.form.file = null;
+        // Trick to reset/clear native browser form validation state
+        this.savingSuccessful = true;
+        this.$nextTick(() => {
+          this.savingSuccessful = false;
+          this.$v.$reset();
+        })
       },
       handleFileUpload(event) {
         this.data.file = event.target.files[0];

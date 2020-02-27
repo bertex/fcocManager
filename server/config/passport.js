@@ -7,7 +7,7 @@ const User = require('../models').User;
 module.exports = function(passport) {
   const opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
-    secretOrKey: 'nodeauthsecret',
+    secretOrKey: 'fcocmapmanager2020',
   };
   passport.use('jwt', new JwtStrategy(opts, function(jwt_payload, done) {
     User

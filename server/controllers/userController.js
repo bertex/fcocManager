@@ -49,6 +49,15 @@ module.exports = {
       })
       .catch((error) => res.status(400).send(error));
   },
+  getUser (req,res) {
+    const userCollection = User
+      .findOne({
+        where: {
+          username: req.body.username
+        },
+      attributes: ['id']});
+    res.status(201).send(userCollection);
+}
 
 };
 

@@ -15,14 +15,16 @@ module.exports = (app) => {
 
   app.get('/api/map', mapsController.getMaps);
 
-  app.post('/api/map/create',passport.authenticate('jwt', { session: false}),mapsController.create);
+  app.get('/api/map/:userId', mapsController.getUserMaps);
 
-  app.put('/api/map/:mapId',mapsController.update);
+  app.post('/api/map/create', passport.authenticate('jwt', { session: false}),mapsController.create);
+
+  app.put('/api/map/:mapId',passport.authenticate('jwt', { session: false}),mapsController.update);
+
+  app.delete('/api/map/:mapId', passport.authenticate('jwt', { session: false}),mapsController.deleteMap);
 
   app.post('/api/signup', userController.signUp);
 
   app.post('/api/signin', userController.signIn);
-
-
 
 };
