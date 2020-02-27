@@ -8,7 +8,6 @@
           <b-nav-item to="/">Inici</b-nav-item>
           <b-nav-item v-if = "!isLoggedIn" to="/login">Log in</b-nav-item>
           <b-nav-item v-if = "!isLoggedIn" to="/register">Register</b-nav-item>
-          <b-nav-item v-if = "isLoggedIn" to="/form">Registrar mapa</b-nav-item>
           <b-nav-item v-if = "isLoggedIn" to="/account">Els meus mapes</b-nav-item>
           <b-nav-item v-if = "isLoggedIn" ><a @click="logout">Logout</a></b-nav-item>
         </b-navbar-nav>
@@ -58,18 +57,5 @@
     text-align: center;
     color: #2c3e50;
   }
-  #nav {
-    padding: 30px;
-  }
-  #nav a {
-    font-weight: bold;
-    color: #2c3e50;
-    cursor: pointer;
-  }
-  #nav a:hover {
-    text-decoration: underline;
-  }
-  #nav a.router-link-exact-active {
-    color: #42b983;
-  }
+
 </style>

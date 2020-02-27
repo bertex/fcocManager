@@ -1,16 +1,20 @@
 <template>
   <div class='col-sm-6 col-sm-offset-3'>
     <h1>Llistat de mapes</h1>
-    <b-icon icon="pencil" variant="success"/>
-    <b-icon icon="trash" variant="danger"/>
-    <b-table striped hover :fields="fields" :items="items">
+    <b-button to="/form" variant="primary">
+      <b-icon icon="plus" />
+      Nou mapa
+    </b-button>
+    <b-table striped responsive=" md" hover :fields="fields" :items="items">
       <template v-slot:cell(actions)="row">
-        <button @click="onEdit(row.item.id)">
-          <b-icon icon="pencil" variant="success"/>
-        </button>
-        <button @click="onDelete(row.item.id)">
-          <b-icon icon="trash" variant="danger"/>
-        </button>
+        <b-button-group>
+          <b-button @click="onEdit(row.item.id)" variant="success">
+            <b-icon icon="pencil"/>
+          </b-button>
+          <b-button @click="onDelete(row.item.id)" variant="danger">
+            <b-icon icon="trash"/>
+          </b-button>
+        </b-button-group>
       </template>
     </b-table>
   </div>
@@ -49,9 +53,15 @@
       },
       onEdit: function (event) {
         console.log(event);
+        console.log(this.$store.state.user);
+        console.log(this.$store.state.token);
       },
       onDelete: function (event) {
-        axios.delete('http://localhost:3000/api/map/' + event)
+        axios.delete('http://localhost:3000/api/map/' + event, {
+          headers: {
+            'Authorization': ` ${this.$store.state.token}`
+          }
+        })
           .then(function () {
             console.log('SUCCESS!!');
           })

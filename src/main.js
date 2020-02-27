@@ -23,6 +23,7 @@ Vue.use(IconsPlugin);
 const token = localStorage.getItem('user-token')
 if (token) {
   Vue.prototype.$http.defaults.headers.common['Authorization'] = token
+  Axios.defaults.headers.common['Authorization'] = token;
 }
 
 /* eslint-disable no-new */

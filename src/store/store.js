@@ -31,14 +31,16 @@ export default new Vuex.Store({
     login({commit}, user){
       return new Promise((resolve, reject) => {
         commit('auth_request');
-        axios({url: 'http://localhost:3000/api/signin', data: user, method: 'POST' })
+        axios.post('http://localhost:3000/api/signin', user)
           .then(resp => {
             const token = resp.data.token;
             const user = resp.data.user;
             localStorage.setItem('token', token);
+            localStorage.setItem('userId',user);
             // Add the following line:
             axios.defaults.headers.common['Authorization'] = token;
             commit('auth_success', token, user);
+            dispatch(USER_REQUEST);
             resolve(resp)
           })
           .catch(err => {
@@ -51,7 +53,7 @@ export default new Vuex.Store({
     register({commit}, user){
       return new Promise((resolve, reject) => {
         commit('auth_request');
-        axios({url: 'http://localhost:3000/api/signup', data: user, method: 'POST' })
+        axios.post('http://localhost:3000/api/signup', user)
           .then(resp => {
             const token = resp.data.token;
             const user = resp.data.user;

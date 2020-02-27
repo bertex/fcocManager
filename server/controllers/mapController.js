@@ -4,7 +4,7 @@ const Maps = require('../models').Maps;
 
 
 module.exports = {
-  async getMaps(req, res) {
+  async getAllMaps(req, res) {
     try {
       const mapsCollection = await Maps.findAll({
         attributes: ['id', 'name', 'club', 'cartographer',
@@ -35,10 +35,28 @@ module.exports = {
       res.status(500).send(e);
     }
   },
+  async getMapById(req, res) {
+    try {
+      const mapsCollection = await Maps.findOne({
+        where: {
+          user_id: req.param.mapId
+        },
+        attributes: ['id', 'name', 'club', 'cartographer',
+          'cartography', 'year', 'geometry'
 
-  async create(req, res) {
+        ]
+      });
+      res.status(201).send(mapsCollection);
+    } catch (e) {
+      console.log(e);
+      res.status(500).send(e);
+    }
+  },
+
+  async createMap(req, res) {
     try {
       let token = getToken(req.headers);
+      console.log(token);
       if (token) {
         const polygon = req.body.file;
         const mapCollection = await Maps.create({
@@ -60,26 +78,29 @@ module.exports = {
   },
 
   deleteMap(req, res) {
-    try {
-      let token = getToken(req.headers);
-      if (token) {
+
+    let token = getToken(req.headers);
+    console.log(token);
+    if (token) {
+      try {
         const mapCollection = Maps.destroy({
           where: {
             id: req.params.mapId
           }
         });
         res.status(201).send(mapCollection);
-      } else {
-        return res.status(403).send({success: false, msg: 'Unauthorized.'});
+      } catch (e) {
+        console.log(e);
+        res.status(400).send(e);
       }
-    } catch (e) {
-      console.log(e);
-      res.status(400).send(e);
+    } else {
+      return res.status(403).send({success: false, msg: 'Unauthorized.'});
     }
+
   },
 
 
-  async update(req, res) {
+  async updateMapById(req, res) {
     try {
       let token = getToken(req.headers);
       if (token) {
@@ -113,6 +134,7 @@ module.exports = {
     getToken = function (headers) {
       if (headers && headers.authorization) {
         let parted = headers.authorization.split(' ');
+        console.log(parted);
         if (parted.length === 2) {
           return parted[1];
         } else {

@@ -158,12 +158,14 @@
             }
           ).then(function () {
           console.log('SUCCESS!!');
+          this.savingSuccessful = true
         })
           .catch(error => {
             console.log(error);
             this.apiError = true
+            this.savingSuccessful = false
           })
-          .finally(() => this.savingSuccessful = true);
+          //.finally(() => this.savingSuccessful = true);
       },
       validateState(name) {
         const {$dirty, $error} = this.$v.form[name];

@@ -45,7 +45,7 @@ let router = new Router({
     },
     {
       path: '*',
-      component: ShowMap,
+      component: ListMaps,
     }
   ]
 });

@@ -48,7 +48,7 @@
         let username = this.email;
         let password = this.password;
         this.$store.dispatch('login', {username, password})
-          .then(() => this.$router.push('/'))
+          .then(() => this.$router.push('/account'))
           .catch(err => console.log(err))
       }
     }
