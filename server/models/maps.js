@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Maps.associate = function(models) {
     // associations can be defined here
-    Maps.belongsTo(models.User, {})
+    Maps.belongsTo(models.User, {foreignKey:{type:DataTypes.UUID}})
   };
   return Maps;
 };

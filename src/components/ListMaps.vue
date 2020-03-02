@@ -22,7 +22,6 @@
 
 <script>
   import axios from "axios";
-  import router from '../router';
 
   export default {
     name: "ListMaps",
@@ -38,23 +37,25 @@
           'actions'
         ],
         items: [],
+        user: null,
       }
     },
     mounted: function () {
       this.getMyMaps();
+
     },
     methods: {
 
-      getMyMaps() {
-        //console.log(this.route.params.id);
-        axios.get('http://localhost:3000/api/map')
+     getMyMaps() {
+       this.user =  JSON.parse (localStorage.getItem("user"));
+        axios.get('http://localhost:3000/api/maps/' + this.user)
           .then(res => {
             this.items = res.data;
           })
       },
       onEdit: function (event) {
         console.log(event);
-        console.log(this.$store.state.user);
+        console.log(this.user);
         console.log(this.$store.state.token);
       },
       onDelete: function (event) {

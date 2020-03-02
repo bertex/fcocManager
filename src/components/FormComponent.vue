@@ -113,7 +113,8 @@
           cartographer: null,
           cartography: null,
           year: null,
-          file: null
+          file: null,
+          user:null
         },
         carto: [{text: 'Escull una opció', value: null}, 'ISOM 2017', 'ISOM 2010', 'ISOM 2000'],
         data: {
@@ -142,7 +143,8 @@
           return;
         }
         this.form.file = await this.shpToGeoJson();
-        console.log(this.form.file.geometry);
+        this.form.user =  JSON.parse (localStorage.getItem("user"));
+        console.log(this.form.user)
         axios
           .post('http://localhost:3000/api/map/create',
             {
@@ -152,6 +154,7 @@
               cartographer: this.form.cartographer,
               cartography: this.form.cartography,
               file: this.form.file.geometry,
+              user_id: this.form.user,
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
               },

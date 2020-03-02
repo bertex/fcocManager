@@ -14,7 +14,7 @@
     },
     mounted() {
       axios
-        .get('http://localhost:3000/api/map')
+        .get('http://localhost:3000/api/maps')
         .then(response => {
           const GeoJson = require ("geojson");
           this.geojson = response.data;

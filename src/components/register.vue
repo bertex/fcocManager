@@ -87,7 +87,7 @@
           password: this.password,
         };
         this.$store.dispatch('register', data)
-          .then(() => this.$router.push('/'))
+          .then(() => this.$router.push('/account'))
           .catch(err => {console.log(err);this.apiError = true})
           .finally(() => this.savingSuccessful = true);
       }

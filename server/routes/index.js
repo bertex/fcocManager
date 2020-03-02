@@ -7,9 +7,9 @@ const userController = require('../controllers/userController');
 
 module.exports = (app) => {
 
-  app.get('/api/map', mapsController.getAllMaps);
+  app.get('/api/maps', mapsController.getAllMaps);
 
-  app.get('/api/map/:userId', mapsController.getUserMaps);
+  app.get('/api/maps/:userId', mapsController.getMapsByUserId);
 
   app.get('/api/map/:mapId', mapsController.getMapById);
 

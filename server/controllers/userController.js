@@ -41,7 +41,7 @@ module.exports = {
             jwt.verify(token, 'fcocmapmanager2020', function (err, data) {
               console.log(err, data);
             });
-            res.json({success: true, token: 'JWT ' + token});
+            res.json({success: true, token: 'JWT ' + token, user:user.id});
           } else {
             res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
           }

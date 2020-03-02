@@ -18,11 +18,11 @@ module.exports = {
     }
   },
 
-  async getUserMaps(req, res) {
+  async getMapsByUserId(req, res) {
     try {
       const mapsCollection = await Maps.findAll({
         where: {
-          user_id: req.param.userId
+          user_id: req.params.userId
         },
         attributes: ['id', 'name', 'club', 'cartographer',
           'cartography', 'year', 'geometry'
@@ -39,7 +39,7 @@ module.exports = {
     try {
       const mapsCollection = await Maps.findOne({
         where: {
-          user_id: req.param.mapId
+          id: req.params.mapId
         },
         attributes: ['id', 'name', 'club', 'cartographer',
           'cartography', 'year', 'geometry'
@@ -54,9 +54,10 @@ module.exports = {
   },
 
   async createMap(req, res) {
-    try {
+      console.log(req.body);
       let token = getToken(req.headers);
       if (token) {
+        try {
         const polygon = req.body.file;
         const mapCollection = await Maps.create({
           name: req.body.name,
@@ -64,16 +65,17 @@ module.exports = {
           cartographer: req.body.cartographer,
           cartography: req.body.cartography,
           geometry: polygon,
-          year: req.body.year
+          year: req.body.year,
+          user_id:req.body.user_id
         });
         res.status(201).send(mapCollection);
+        } catch (e) {
+          console.log(e);
+          res.status(400).send(e);
+        }
       } else {
         return res.status(403).send({success: false, msg: 'Unauthorized.'});
       }
-    } catch (e) {
-      console.log(e);
-      res.status(400).send(e);
-    }
   },
 
   deleteMap(req, res) {
