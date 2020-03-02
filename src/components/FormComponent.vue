@@ -156,15 +156,12 @@
                 'Content-Type': 'application/x-www-form-urlencoded'
               },
             }
-          ).then(function () {
-          console.log('SUCCESS!!');
-          this.savingSuccessful = true
-        })
+          ).then(() => this.savingSuccessful = true)
           .catch(error => {
             console.log(error);
-            this.apiError = true
-            this.savingSuccessful = false
-          })
+            this.apiError = true;
+            this.savingSuccessful = false;
+          });
           //.finally(() => this.savingSuccessful = true);
       },
       validateState(name) {

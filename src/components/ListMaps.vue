@@ -5,7 +5,7 @@
       <b-icon icon="plus" />
       Nou mapa
     </b-button>
-    <b-table striped responsive=" md" hover :fields="fields" :items="items">
+    <b-table ref="table" striped responsive=" md" hover :fields="fields" :items="items">
       <template v-slot:cell(actions)="row">
         <b-button-group>
           <b-button @click="onEdit(row.item.id)" variant="success">
@@ -22,6 +22,7 @@
 
 <script>
   import axios from "axios";
+  import router from '../router';
 
   export default {
     name: "ListMaps",
@@ -62,8 +63,10 @@
             'Authorization': ` ${this.$store.state.token}`
           }
         })
-          .then(function () {
-            console.log('SUCCESS!!');
+          .then(response => {
+            const index = this.items.findIndex(items => items.id === event) // find the post index
+            if (~index) // if the post exists in array
+              this.items.splice(index, 1) //delete the post
           })
           .catch(error => {
             console.log(error);

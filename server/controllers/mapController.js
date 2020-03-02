@@ -56,7 +56,6 @@ module.exports = {
   async createMap(req, res) {
     try {
       let token = getToken(req.headers);
-      console.log(token);
       if (token) {
         const polygon = req.body.file;
         const mapCollection = await Maps.create({
@@ -80,7 +79,6 @@ module.exports = {
   deleteMap(req, res) {
 
     let token = getToken(req.headers);
-    console.log(token);
     if (token) {
       try {
         const mapCollection = Maps.destroy({

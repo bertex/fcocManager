@@ -40,8 +40,8 @@ export default new Vuex.Store({
             // Add the following line:
             axios.defaults.headers.common['Authorization'] = token;
             commit('auth_success', token, user);
-            dispatch(USER_REQUEST);
-            resolve(resp)
+            resolve(resp);
+            console.log(token);
           })
           .catch(err => {
             commit('auth_error');

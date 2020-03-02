@@ -4,7 +4,7 @@ const User = require('../models').User;
 const jwt = require('jsonwebtoken');
 
 module.exports = {
-  signUp(req,res) {
+  signUp(req, res) {
     console.log(req.body);
     if (!req.body.username || !req.body.password) {
       res.status(400).send({msg: 'Please pass username and password.'})
@@ -22,7 +22,7 @@ module.exports = {
         });
     }
   },
-  signIn(req,res) {
+  signIn(req, res) {
     const userCollection = User
       .findOne({
         where: {
@@ -36,9 +36,9 @@ module.exports = {
           });
         }
         user.comparePassword(req.body.password, (err, isMatch) => {
-          if(isMatch && !err) {
-            let token = jwt.sign(JSON.parse(JSON.stringify(user)), 'nodeauthsecret', {expiresIn: 86400 * 30});
-            jwt.verify(token, 'nodeauthsecret', function(err, data){
+          if (isMatch && !err) {
+            let token = jwt.sign(JSON.parse(JSON.stringify(user)), 'fcocmapmanager2020', {expiresIn: 86400 * 30});
+            jwt.verify(token, 'fcocmapmanager2020', function (err, data) {
               console.log(err, data);
             });
             res.json({success: true, token: 'JWT ' + token});
@@ -49,15 +49,7 @@ module.exports = {
       })
       .catch((error) => res.status(400).send(error));
   },
-  getUser (req,res) {
-    const userCollection = User
-      .findOne({
-        where: {
-          username: req.body.username
-        },
-      attributes: ['id']});
-    res.status(201).send(userCollection);
-}
 
 };
+
 
