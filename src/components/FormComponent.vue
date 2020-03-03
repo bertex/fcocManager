@@ -14,7 +14,7 @@
             placeholder="Nom del mapa"
             :state="validateState('name')"
             aria-describedby="inputNomFeedback"/>
-          <b-form-invalid-feedback id="inputNomFeedback">Aquest és un camp obligatori.</b-form-invalid-feedback>
+          <b-form-invalid-feedback id="inputNomFeedback">Aquest és un camp obligatori. Ha de tenir mínim 10 caràcters</b-form-invalid-feedback>
         </b-col>
       </b-form-group>
       <b-form-group id="club-grup" label="Club" label-for="inputClub" label-align="right"
@@ -70,7 +70,7 @@
             placeholder="Any del mapa"
             :state="validateState('year')"
             aria-describedby="inputYearFeedback"/>
-          <b-form-invalid-feedback id="inputYearFeedback">Aquest és un camp obligatorii és numèric
+          <b-form-invalid-feedback id="inputYearFeedback">Aquest és un camp obligatorii entre 1950 i 2050
           </b-form-invalid-feedback>
         </b-col>
       </b-form-group>
@@ -96,7 +96,7 @@
 
 <script>
 
-  import {required, numeric, minLength} from "vuelidate/lib/validators";
+  import {required, between, minLength} from "vuelidate/lib/validators";
   import {validationMixin} from "vuelidate";
 
   const shapefile = require('shapefile');
@@ -133,7 +133,7 @@
         club: {required},
         cartographer: {required},
         cartography: {required},
-        year: {required, numeric}
+        year: {required, between: between(1950,2040)}
       }
     },
     methods: {
@@ -165,7 +165,6 @@
             this.apiError = true;
             this.savingSuccessful = false;
           });
-          //.finally(() => this.savingSuccessful = true);
       },
       validateState(name) {
         const {$dirty, $error} = this.$v.form[name];
