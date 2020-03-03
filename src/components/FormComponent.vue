@@ -86,7 +86,15 @@
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
     <div class="success" v-if="savingSuccessful">
-      {{ this.text }}
+      <p>{{ this.text }}</p>
+      <b-button @click="refresh()" variant="primary">
+        <b-icon icon="plus" />
+        Nou mapa
+      </b-button>
+      <b-button to="/account" variant="primary">
+        <b-icon icon="folder" />
+        Els meus mapes
+      </b-button>
     </div>
     <div class="success" v-if="apiError">
       {{ this.textError }}
@@ -171,8 +179,6 @@
         return $dirty ? !$error : null;
       },
       onReset(evt) {
-        evt.preventDefault();
-        // Reset our form values
         this.form.name = null;
         this.form.club = null;
         this.form.cartography = null;
@@ -185,6 +191,10 @@
           this.savingSuccessful = false;
           this.$v.$reset();
         })
+      },
+      refresh(){
+        this.savingSuccessful = false;
+        this.onReset();
       },
       handleFileUpload(event) {
         this.data.file = event.target.files[0];

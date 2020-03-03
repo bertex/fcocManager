@@ -59,19 +59,21 @@
         console.log(this.$store.state.token);
       },
       onDelete: function (event) {
-        axios.delete('http://localhost:3000/api/map/' + event, {
-          headers: {
-            'Authorization': ` ${this.$store.state.token}`
-          }
-        })
-          .then(response => {
-            const index = this.items.findIndex(items => items.id === event) // find the post index
-            if (~index) // if the post exists in array
-              this.items.splice(index, 1) //delete the post
+        if(confirm("Do you really want to delete?")) {
+          axios.delete('http://localhost:3000/api/map/' + event, {
+            headers: {
+              'Authorization': ` ${this.$store.state.token}`
+            }
           })
-          .catch(error => {
-            console.log(error);
-          })
+            .then(response => {
+              const index = this.items.findIndex(items => items.id === event) // find the post index
+              if (~index) // if the post exists in array
+                this.items.splice(index, 1) //delete the post
+            })
+            .catch(error => {
+              console.log(error);
+            })
+        }
       }
     }
   }
