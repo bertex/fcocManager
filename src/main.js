@@ -20,9 +20,9 @@ Vue.use(L);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-const token = localStorage.getItem('user-token')
+const token = localStorage.getItem('token');
+const user = localStorage.getItem('user');
 if (token) {
-  Vue.prototype.$http.defaults.headers.common['Authorization'] = token
   Axios.defaults.headers.common['Authorization'] = token;
 }
 

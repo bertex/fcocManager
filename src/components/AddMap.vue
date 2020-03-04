@@ -91,7 +91,7 @@
         <b-icon icon="plus" />
         Nou mapa
       </b-button>
-      <b-button to="/account" variant="primary">
+      <b-button to="/myMaps" variant="primary">
         <b-icon icon="folder" />
         Els meus mapes
       </b-button>
@@ -129,6 +129,7 @@
           file: '',
           ziped: ''
         },
+
         text: " Mapa inserit de forma correcte",
         textError: "no s'ha pogut insertar el mapa.",
         savingSuccessful: false,
@@ -152,7 +153,6 @@
         }
         this.form.file = await this.shpToGeoJson();
         this.form.user =  JSON.parse (localStorage.getItem("user"));
-        console.log(this.form.user)
         axios
           .post('http://localhost:3000/api/map/create',
             {

@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import FormComponent from "../components/FormComponent.vue";
+import FormComponent from "../components/AddMap.vue";
 import ShowMap from "../components/ShowMap.vue";
 import Login from "../components/Login.vue";
 import Register from "../components/register.vue";
 import ListMaps from "../components/ListMaps";
+import EditMap from "../components/EditMap";
 import store from "../store/store.js";
 
 Vue.use(Router);
@@ -18,7 +19,7 @@ let router = new Router({
       component: ShowMap,
     },
     {
-      path: '/form',
+      path: '/addMap',
       name: 'FormComponent',
       component: FormComponent,
       meta: {
@@ -26,9 +27,18 @@ let router = new Router({
       }
     },
     {
-      path: '/account',
+      path: '/myMaps',
       name: 'ListMaps',
       component: ListMaps,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/editMap/:id',
+      name: 'EditMap',
+      component: EditMap,
+      props: true,
       meta: {
         requiresAuth: true
       }

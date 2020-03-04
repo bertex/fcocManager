@@ -8,7 +8,7 @@
           <b-nav-item to="/">Inici</b-nav-item>
           <b-nav-item v-if = "!isLoggedIn" to="/login">Log in</b-nav-item>
           <b-nav-item v-if = "!isLoggedIn" to="/register">Register</b-nav-item>
-          <b-nav-item v-if = "isLoggedIn" to="/account">Els meus mapes</b-nav-item>
+          <b-nav-item v-if = "isLoggedIn" to="/myMaps">Els meus mapes</b-nav-item>
           <b-nav-item v-if = "isLoggedIn" ><a @click="logout">Logout</a></b-nav-item>
         </b-navbar-nav>
       </b-collapse>

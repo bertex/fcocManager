@@ -1,7 +1,7 @@
 <template>
   <div class='col-sm-6 col-sm-offset-3'>
     <h1>Llistat de mapes</h1>
-    <b-button to="/form" variant="primary">
+    <b-button to="/addMap" variant="primary">
       <b-icon icon="plus" />
       Nou mapa
     </b-button>
@@ -55,8 +55,7 @@
       },
       onEdit: function (event) {
         console.log(event);
-        console.log(this.user);
-        console.log(this.$store.state.token);
+        this.$router.push('/editMap/'+event);
       },
       onDelete: function (event) {
         if(confirm("Do you really want to delete?")) {
