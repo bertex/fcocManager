@@ -54,7 +54,6 @@
           })
       },
       onEdit: function (event) {
-        console.log(event);
         this.$router.push('/editMap/'+event);
       },
       onDelete: function (event) {

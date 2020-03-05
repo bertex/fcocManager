@@ -48,7 +48,7 @@
         let username = this.email;
         let password = this.password;
         this.$store.dispatch('login', {username, password})
-          .then(() => this.$router.push('/account'))
+          .then(() => this.$router.push('/myMaps'))
           .catch(err => console.log(err))
       }
     }

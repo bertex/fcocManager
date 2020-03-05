@@ -18,7 +18,6 @@
         .then(response => {
           const GeoJson = require ("geojson");
           this.geojson = response.data;
-          console.log(this.geojson);
           let showGeoJson =GeoJson.parse (this.geojson, {GeoJSON:'geometry'});
           let myLayer = L.geoJSON(showGeoJson,{
             onEachFeature: function (feature, layer) {
