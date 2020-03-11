@@ -7,17 +7,26 @@
 
   export default {
     name: "LeafletMap",
+    props:['sName','sClub','sYear','sCartography'],
     data() {
       return {
-        map: null
+        map: null,
       };
     },
     mounted() {
+      const params  ={
+        name: this.sName,
+        club: this.sClub,
+        year: this.sYear,
+        cartography: this.sCartography
+      };
       axios
-        .get('http://localhost:3000/api/maps')
+        .get('http://localhost:3000/api/maps', {params})
         .then(response => {
+          console.log(params);
           const GeoJson = require ("geojson");
           this.geojson = response.data;
+          console.log(this.sClub);
           let showGeoJson =GeoJson.parse (this.geojson, {GeoJSON:'geometry'});
           let myLayer = L.geoJSON(showGeoJson,{
             onEachFeature: function (feature, layer) {
@@ -47,7 +56,7 @@
 
 <style >
   #myMapId {
-    width: 800px;
+    width: 100%;
     height: 600px;
   }
 

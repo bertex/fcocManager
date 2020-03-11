@@ -102,9 +102,9 @@
             v-model="form.geometry"/>
         </b-col>
       </b-form-group>
-      <b-button variant="success"@click="isEditing = !isEditing" v-if="!isEditing">Edit</b-button>
-      <b-button variant="primary"@click="save" v-else-if="isEditing">Save</b-button>
-      <b-button variant="danger"v-if="isEditing" @click="cancel">Cancel</b-button>
+      <b-button variant="success" @click="isEditing = !isEditing" v-if="!isEditing">Edit</b-button>
+      <b-button variant="primary" @click="save" v-else-if="isEditing">Save</b-button>
+      <b-button variant="danger" v-if="isEditing" @click="cancel">Cancel</b-button>
     </b-form>
   </div>
 </template>

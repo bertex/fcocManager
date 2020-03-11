@@ -7,6 +7,7 @@ module.exports = {
   async getAllMaps(req, res) {
     try {
       const mapsCollection = await Maps.findAll({
+        where: req.query,
         attributes: ['id', 'name', 'club', 'cartographer',
           'cartography', 'year', 'geometry'
         ]

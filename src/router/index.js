@@ -17,6 +17,7 @@ let router = new Router({
       path: '/',
       name: 'ShowMap',
       component: ShowMap,
+      props: true
     },
     {
       path: '/addMap',

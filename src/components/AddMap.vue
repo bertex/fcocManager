@@ -178,7 +178,7 @@
         const {$dirty, $error} = this.$v.form[name];
         return $dirty ? !$error : null;
       },
-      onReset(evt) {
+      onReset() {
         this.form.name = null;
         this.form.club = null;
         this.form.cartography = null;

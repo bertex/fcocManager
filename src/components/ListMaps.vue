@@ -64,9 +64,9 @@
             }
           })
             .then(response => {
-              const index = this.items.findIndex(items => items.id === event) // find the post index
-              if (~index) // if the post exists in array
-                this.items.splice(index, 1) //delete the post
+              const index = this.items.findIndex(items => items.id === event);
+              if (~index)
+                this.items.splice(index, 1)
             })
             .catch(error => {
               console.log(error);
