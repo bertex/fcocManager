@@ -79,14 +79,20 @@
           })
       },
       handleSubmit() {
-        this.$router.replace({
-          name: 'ShowMap',
+        this.$router.push({
+          name: this.$route.name,
           params: {
             sName: this.form.name,
             sClub: this.form.club,
             sYear: this.form.year,
             sCartography: this.form.cartography
-          }
+          },
+          query: {
+            sName: this.form.name,
+            sClub: this.form.club,
+            sYear: this.form.year,
+            sCartography: this.form.cartography
+          },
         }).catch(err=>{});
         this.$refs['my-modal'].hide();
       }
