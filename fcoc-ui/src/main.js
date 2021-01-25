@@ -9,7 +9,6 @@ import './assets/styles/app.scss'
 import '../node_modules/leaflet/dist/leaflet.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../node_modules/bootstrap-vue/dist/bootstrap-vue.css'
-import 'babel-polyfill'
 import store from './store/store.js'
 import Axios from 'axios'
 
@@ -20,14 +19,14 @@ Vue.use(L);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-const token = localStorage.getItem('token');
+/*const token = localStorage.getItem('token');
 const user = localStorage.getItem('user');
 if (token) {
   Axios.defaults.headers.common['Authorization'] = token;
-}
+}*/
 
 /* eslint-disable no-new */
-  const root =new Vue({
+  new Vue({
     router,
     store,
     L,

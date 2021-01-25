@@ -3,7 +3,7 @@
     <b-navbar toggleable="md" type="dark" variant="info">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
       <b-navbar-brand id="logo" to="/">
-        <b-img src="../static/logofcoc_lletres_costat.png" left thumbnail fluid/>
+        <b-img src="../public/logofcoc_lletres_costat.png" left thumbnail fluid/>
       </b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav>
@@ -93,14 +93,14 @@
             sYear: this.form.year,
             sCartography: this.form.cartography
           },
-        }).catch(err=>{});
+        }).catch();
         this.$refs['my-modal'].hide();
       }
     },
 
     created: function () {
       this.$http.interceptors.response.use(undefined, function (err) {
-        return new Promise(function (resolve, reject) {
+        return new Promise(function () {
           if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
             this.$store.dispatch('logout')
           }

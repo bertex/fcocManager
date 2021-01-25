@@ -1,0 +1,35 @@
+version: "3.6"
+services:
+  api:
+    build:
+      context: ./fcoc-api
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    container_name: fcoc-api
+    ports:
+      - "3000:3000"
+  db:
+    environment:
+      POSTGRES_USER: ${USER}
+      POSTGRES_PASSWORD: ${PASSWORD}
+      POSTGRES_DB: ${DB}
+    image: postgis/postgis
+    container_name: fcoc-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - fcoc-pgdata:/var/lib/postgresql/data
+  vue:
+    build:
+      context: ./atlesvue
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: atles-ui
+    volumes:
+      - './atlesvue:/app'
+      - '/app/node_modules'
+volumes:
+  pgdata:
+    driver: local

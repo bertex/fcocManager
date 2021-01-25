@@ -67,6 +67,7 @@
               const index = this.items.findIndex(items => items.id === event);
               if (~index)
                 this.items.splice(index, 1)
+              console.log (response)
             })
             .catch(error => {
               console.log(error);
