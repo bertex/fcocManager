@@ -22,14 +22,14 @@ services:
       - fcoc-pgdata:/var/lib/postgresql/data
   vue:
     build:
-      context: ./atlesvue
+      context: ./fcoc-ui
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    container_name: atles-ui
+    container_name: fcoc-ui
     volumes:
-      - './atlesvue:/app'
+      - './fcoc-ui:/app'
       - '/app/node_modules'
 volumes:
-  pgdata:
+  fcoc-pgdata:
     driver: local
