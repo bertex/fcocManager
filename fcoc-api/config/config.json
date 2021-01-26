@@ -6,11 +6,11 @@
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
-  "test": {
+  "docker": {
     "username": "postgres",
     "password": "Xungo-1",
     "database": "postgres",
-    "host": "127.0.0.1",
+    "host": "fcoc-db",
     "dialect": "postgres"
   },
   "production": {
