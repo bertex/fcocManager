@@ -7,7 +7,8 @@ const cors = require('cors');
 const app = express();
 
 var corsOptions = {
-  origin: "http://fcoc-ui:8080"
+  origin: "http://fcoc-ui:8080",
+  origin: "http://localhost:8080"
 };
 
 app.use(bodyParser.json());

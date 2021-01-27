@@ -2,7 +2,7 @@
 #####Crear una  imatge docker
 ```
 cd fcoc-api
-docker volume create pgdata
+docker volume create fcoc-pgdata
 docker run --name fcocDB -e POSTGRES_PASSWORD=Xungo-1 -d -p 5432:5432 -v fcoc-pgdata:/var/lib/postgresql/data postgis/postgis
 docker start fcocDB
 ```
@@ -16,7 +16,7 @@ $ CREATE DATABASE fcocmapes;
 #####Inicialitzem la DB
 ```
 sequelize db:migrate
-sequelize db:sedd all
+sequelize db:seed all
 ```
 ### Això ho executem per posar en marxa Api sense docker
 #####Executem api

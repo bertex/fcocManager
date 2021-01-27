@@ -1,3 +1,4 @@
+
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -33,6 +34,13 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      user_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {model: 'Users', key: 'id'},
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
       }
     });
   },
