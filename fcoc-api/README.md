@@ -22,7 +22,7 @@ sequelize db:seed all
 #####Executem api
  ```
 cd fcoc-api
-node server.js
+npm start
 ```
 #### Si volem arrencar api amb docker
 ```

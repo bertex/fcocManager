@@ -6,11 +6,10 @@ module.exports = (sequelize, DataTypes) => {
     year: DataTypes.INTEGER,
     cartography: DataTypes.STRING,
     geometry: DataTypes.GEOMETRY,
-    user_id: DataTypes.INTEGER
   }, {});
   Maps.associate = function(models) {
     // associations can be defined here
-    Maps.belongsTo(models.User, {foreignKey:{type:DataTypes.UUID}})
+    Maps.belongsTo(models.User, {foreignKey:'user_id'})
   };
   return Maps;
 };

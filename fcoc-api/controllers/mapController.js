@@ -55,10 +55,13 @@ module.exports = {
   },
 
   async createMap(req, res) {
-    console.log(req.body);
+    console.log("body:");
+    str=JSON.stringify(req.body);
+    console.log(str);
+    console.log("tedashkuen");
     let token = getToken(req.headers);
     if (token) {
-      try {
+      //try {
         const polygon = req.body.file;
         const mapCollection = await Maps.create({
           name: req.body.name,
@@ -70,10 +73,10 @@ module.exports = {
           user_id: req.body.user_id
         });
         res.status(201).send(mapCollection);
-      } catch (e) {
-        console.log(e);
-        res.status(400).send(e);
-      }
+      //} catch (e) {
+      //  console.log(e);
+      //7  res.status(400).send(e);
+     // }
     } else {
       return res.status(403).send({success: false, msg: 'Unauthorized.'});
     }
