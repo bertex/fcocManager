@@ -3,12 +3,10 @@
 </template>
 
 <script>
-  import axios from "axios";
   import L from "leaflet";
 
   export default {
     name: "LeafletMap",
-    props:['sName','sClub','sYear','sCartography'],
     data() {
       return {
         map: null,
@@ -23,40 +21,41 @@
         tileLayer:null
       };
     },
+    computed: {
+      getterAllMaps() {
+        return this.$store.getters.all_maps
+      }
+    },
+    mounted() {
+      this.getAllMaps();
+      let allmaps=this.$store.getters.all_maps;
+      this.initMap();
+      this.getData(allmaps);
+    },
+    updated() {
+      let allmaps=this.$store.getters.all_maps;
+      this.getData(allmaps);
+    },
+    beforeDestroy() {
+      if (this.map) {
+        this.map.remove();
+      }
+    },
     methods: {
-      getData() {
-        const query = {
-          name: this.$route.query.sName,
-          club: this.$route.query.sClub,
-          year: this.$route.query.sYear,
-          cartography: this.$route.query.sCartography
-        };
-        const params = {
-          name: this.sName,
-          club: this.$route.query.sClub,
-          year: this.sYear,
-          cartography: this.sCartography
-        };
-        axios
-          .get('http://localhost:3000/api/maps', {params})
-          .then(response => {
-            console.log(query);
-            console.log(params);
-            const GeoJson = require("geojson");
-            this.geojson = response.data;
-            let showGeoJson = GeoJson.parse(this.geojson, {GeoJSON: 'geometry'});
-            this.layers = L.geoJSON(showGeoJson, {
-              onEachFeature: function (feature, layer) {
-                layer.bindPopup(feature.properties.name + '</br>' + feature.properties.club
-                  + '</br>' + feature.properties.cartographer + '</br>' + feature.properties.cartography
-                  + '</br>' + feature.properties.year);
-              }
-            })
-              .addTo(this.map);
-          })
-          .catch(error => {
-            console.log(error);
-          });
+      getAllMaps:function () {
+        this.$store.dispatch('getAllMaps')
+      },
+      getData(allmaps) {
+        const GeoJson = require("geojson");
+        let showGeoJson = GeoJson.parse(allmaps, {GeoJSON: 'geometry'});
+        this.layers = L.geoJSON(showGeoJson, {
+          onEachFeature: function (feature, layer) {
+            layer.bindPopup(feature.properties.name + '</br>' + feature.properties.club
+              + '</br>' + feature.properties.cartographer + '</br>' + feature.properties.cartography
+              + '</br>' + feature.properties.year);
+            }
+        })
+        .addTo(this.map);
       },
       initMap(){
         this.map =L.map(this.$refs['LeafletMap']).setView([41.50, 1.523], 8,);
@@ -66,22 +65,7 @@
         }).addTo(this.map);
       }
     },
-    mounted() {
-      this.initMap();
-      this.getData();
-    },
 
-
-
-
-    updated() {
-      this.getData();
-    },
-    beforeDestroy() {
-      if (this.map) {
-        this.map.remove();
-      }
-    }
   };
 </script>
 

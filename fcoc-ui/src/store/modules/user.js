@@ -1,10 +1,7 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import axios from 'axios'
+import ApiData from "../../services/api-service"
+import http from "../../http-common";
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
+const user= {
   state: {
     status: '',
     token: localStorage.getItem('token') || '',
@@ -31,13 +28,13 @@ export default new Vuex.Store({
     login({commit}, user){
       return new Promise((resolve, reject) => {
         commit('auth_request');
-        axios.post('http://localhost:3000/api/signin', user)
+        ApiData.signin(user)
           .then(resp => {
             const token = resp.data.token;
             const user = resp.data.user;
             localStorage.setItem('token', token);
             localStorage.setItem('user', user);
-            axios.defaults.headers.common['Authorization'] = token;
+            http.defaults.headers.common['Authorization'] = token;
             commit('auth_success', {token, user});
             resolve(resp);
           })
@@ -51,13 +48,13 @@ export default new Vuex.Store({
     register({commit}, user){
       return new Promise((resolve, reject) => {
         commit('auth_request');
-        axios.post('http://localhost:3000/api/signup', user)
+        ApiData.signup(user)
           .then(resp => {
             const token = resp.data.token;
             const user = resp.data.user;
             localStorage.setItem('token', token);
             localStorage.setItem('user', user);
-            axios.defaults.headers.common['Authorization'] = token;
+            http.defaults.headers.common['Authorization'] = token;
             commit('auth_success', {token, user});
             resolve(resp)
           })
@@ -74,7 +71,7 @@ export default new Vuex.Store({
         commit('logout');
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        delete axios.defaults.headers.common['Authorization'];
+        delete http.defaults.headers.common['Authorization'];
         resolve()
       })
     }
@@ -83,4 +80,5 @@ export default new Vuex.Store({
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
   }
-})
+}
+export default user;

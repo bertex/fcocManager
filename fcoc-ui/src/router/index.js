@@ -6,7 +6,7 @@ import Login from "../components/Login.vue";
 import Register from "../components/register.vue";
 import ListMaps from "../components/ListMaps";
 import EditMap from "../components/EditMap";
-import store from "../store/store.js";
+import store from "../store/modules/user.js";
 
 Vue.use(Router);
 
@@ -56,7 +56,7 @@ let router = new Router({
     },
     {
       path: '*',
-      component: ListMaps,
+      component: ShowMap,
     }
   ]
 });

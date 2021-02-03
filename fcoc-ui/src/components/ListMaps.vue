@@ -5,7 +5,7 @@
       <b-icon icon="plus" />
       Nou mapa
     </b-button>
-    <b-table ref="table" striped responsive=" md" hover :fields="fields" :items="items">
+    <b-table ref="table" striped responsive=" md" hover :fields="fields" :items="gettermymaps">
       <template v-slot:cell(actions)="row">
         <b-button-group>
           <b-button @click="onEdit(row.item.id)" variant="success">
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import axios from "axios";
+ //import axios from "axios";
 
   export default {
     name: "ListMaps",
@@ -36,44 +36,30 @@
           {key: 'year', sortable: true},
           'actions'
         ],
-        items: [],
         user: null,
       }
     },
-    mounted: function () {
+    computed:{
+      gettermymaps(){
+        return this.$store.getters.my_maps
+      }
+    },
+    mounted () {
       this.getMyMaps();
-
     },
     methods: {
-
-     getMyMaps() {
+     getMyMaps:function () {
        this.user =  JSON.parse (localStorage.getItem("user"));
-        axios.get('http://localhost:3000/api/maps/' + this.user)
-          .then(res => {
-            this.items = res.data;
-          })
-      },
-      onEdit: function (event) {
-        this.$router.push('/editMap/'+event);
-      },
-      onDelete: function (event) {
+       this.$store.dispatch('getMyMaps',this.user)
+     },
+     onEdit: function (event) {
+        this.$router.push('/editMap/'+ event);
+     },
+     onDelete: function (event) {
         if(confirm("Do you really want to delete?")) {
-          axios.delete('http://localhost:3000/api/map/' + event, {
-            headers: {
-              'Authorization': ` ${this.$store.state.token}`
-            }
-          })
-            .then(response => {
-              const index = this.items.findIndex(items => items.id === event);
-              if (~index)
-                this.items.splice(index, 1)
-              console.log (response)
-            })
-            .catch(error => {
-              console.log(error);
-            })
+          this.$store.dispatch('removeMapById',event)
         }
-      }
+     }
     }
   }
 </script>

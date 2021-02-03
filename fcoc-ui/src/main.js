@@ -9,7 +9,7 @@ import './assets/styles/app.scss'
 import '../node_modules/leaflet/dist/leaflet.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../node_modules/bootstrap-vue/dist/bootstrap-vue.css'
-import store from './store/store.js'
+import store from './store'
 import Axios from 'axios'
 
 Vue.config.productionTip = false;
@@ -19,12 +19,10 @@ Vue.use(L);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-/*const token = localStorage.getItem('token');
-const user = localStorage.getItem('user');
+const token = localStorage.getItem('token');
 if (token) {
-  Axios.defaults.headers.common['Authorization'] = token;
-}*/
-
+  Vue.prototype.$http.defaults.headers.common['Authorization'] = token;
+}
 /* eslint-disable no-new */
   new Vue({
     router,

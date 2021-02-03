@@ -121,16 +121,7 @@
     props:['id'],
     data() {
       return {
-        form: {
-          name: null,
-          club: null,
-          cartographer: null,
-          cartography: null,
-          year: null,
-          file: null,
-          geometry:null,
-          user: null
-        },
+
         carto: [{text: 'Escull una opció', value: null}, 'ISOM 2017', 'ISOM 2010', 'ISOM 2000'],
         data: {
           file: null,
@@ -150,6 +141,18 @@
     },
     created() {
       this.getMapById()
+    },
+    computed: {
+      form:  {
+        get()
+        {
+          return this.$store.getters.maps_byid
+        },
+        set(form) {
+
+          this.$store.commit('MAPS_BYID', form)
+        }
+      }
     },
     methods: {
       async save() {
@@ -181,12 +184,8 @@
           });
         this.isEditing = false;
       },
-      getMapById(){
-        axios.get('http://localhost:3000/api/map/'+this.id)
-          .then(response => {
-            this.form= response.data;
-            this.cachedForm = Object.assign({}, this.form);
-          });
+      getMapById: function(){
+          this.$store.dispatch('getMapsId',this.id)
       },
       cancel() {
         this.form = Object.assign({}, this.cachedForm);

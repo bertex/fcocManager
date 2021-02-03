@@ -17,7 +17,7 @@ module.exports = (app) => {
 
   app.put('/api/map/:mapId',passport.authenticate('jwt', { session: false}),mapsController.updateMapById);
 
-  app.delete('/api/map/:mapId', passport.authenticate('jwt', { session: false}),mapsController.deleteMap);
+  app.delete('/api/map/:mapId',passport.authenticate('jwt', { session: false}), mapsController.deleteMap);
 
   app.post('/api/signup', userController.signUp);
 
